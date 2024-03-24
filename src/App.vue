@@ -12,6 +12,13 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
 header {
-  margin: 1rem;
+  padding: 1rem;
+
+  @media (min-width: 1553px) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1536px;
+    padding: 1.5rem 2.5rem;
+  }
 }
 </style>
