@@ -3,6 +3,10 @@ import ButtonItem from '@/components/ButtonItem.vue'
 import CardItem from '@/components/CardItem.vue'
 import HeadingMain from '@/components/HeadingMain.vue'
 import TextItem from '@/components/TextItem.vue'
+import Sliders from '@/components/SlidersGroup.vue'
+import { useCalculatorStore } from '@/stores/calculator'
+
+const calculator = useCalculatorStore()
 </script>
 
 <template>
@@ -29,11 +33,12 @@ import TextItem from '@/components/TextItem.vue'
           Estimate your monthly payments based on the chosen loan amount and time period
         </TextItem>
       </div>
+      <div class="divider" />
       <div class="sliders_wrapper">
-        <div class="sliders"></div>
+        <Sliders />
         <div class="result">
           <TextItem :weight="'bold'">Monthly payment</TextItem>
-          <HeadingMain>144.84€</HeadingMain>
+          <HeadingMain>{{ calculator.monthlyPayment }} €</HeadingMain>
           <ButtonItem :text="'Apply now'" :style="'primary'" />
           <TextItem :size="'small'">
             The calculation is approximate and may differ from the conditions offered to you. Please
@@ -63,6 +68,18 @@ import TextItem from '@/components/TextItem.vue'
     margin-right: auto;
     max-width: 1536px;
     gap: 1.5rem;
+  }
+}
+
+.divider {
+  display: none;
+
+  @include md {
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: $black;
+    opacity: 0.15;
   }
 }
 
@@ -124,17 +141,17 @@ import TextItem from '@/components/TextItem.vue'
     gap: 2.5rem;
   }
 
-  .sliders {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
   .result {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
   }
+}
+
+.ib-slider-handle {
+  width: 1rem;
+  height: 6px;
+  background-color: red;
 }
 </style>
