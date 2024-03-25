@@ -112,20 +112,23 @@ const calculator = useCalculatorStore()
   gap: 2.5rem;
 
   .content {
-    padding: 4rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 1rem;
 
     @include md {
+      padding: 2rem 1.5rem;
+    }
+
+    @include lg {
+      align-items: center;
       padding: 5rem 2.5rem;
       gap: 1.5rem;
     }
   }
 
-  @include md {
+  @include lg {
     flex-direction: row;
     gap: 2.5rem;
   }

@@ -14,13 +14,13 @@ const calculator = useCalculatorStore()
 <template>
   <div class="wrapper">
     <div class="row">
-      <SliderInput v-model="calculator.amount" :min="300" :max="7200" :unit="'€'" />
       <TextInput v-model="calculator.amount" :label="'Amount'" :type="'number'" />
+      <SliderInput v-model="calculator.amount" :min="300" :max="7200" :unit="'€'" />
     </div>
 
     <div class="row">
-      <SliderInput v-model="calculator.period" :min="2" :max="72" :unit="'months'" :data="data" />
       <SelectInput v-model="calculator.period" :label="'Period'" :options="PERIOD_OPTIONS" />
+      <SliderInput v-model="calculator.period" :min="2" :max="72" :unit="'months'" :data="data" />
     </div>
   </div>
 </template>
@@ -33,6 +33,11 @@ const calculator = useCalculatorStore()
 }
 .row {
   display: flex;
+  flex-direction: column;
   gap: 1.5rem;
+
+  @include md {
+    flex-direction: row-reverse;
+  }
 }
 </style>
