@@ -93,8 +93,8 @@ const handleModalClose = () => (modalOpen.value = false)
 
 .image {
   object-fit: cover;
-  height: 100%;
   width: 100%;
+  border-radius: 100px;
 
   @include md {
     border-radius: 200px;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  content?: Boolean
+  content?: boolean
 }>()
 </script>
 
@@ -13,13 +13,13 @@ defineProps<{
 <style scoped lang="scss">
 .card {
   border-radius: 100px;
-  background-color: $sage-green;
 
   @include md {
     border-radius: 200px;
   }
 
   &.content {
+    background-color: $sage-green;
     display: flex;
     flex-direction: column;
     justify-content: center;
