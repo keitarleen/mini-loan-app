@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ChevronIcon from '@/components/ChevronIcon.vue'
 defineProps<{
   label: string
   options: Array<{ label: string; value: number }>
@@ -20,6 +21,9 @@ const value = defineModel<Number>()
       </option>
     </select>
     <label :class="{ top: value !== 0 }">{{ label }}</label>
+    <div class="arrow">
+      <ChevronIcon />
+    </div>
   </div>
 </template>
 
@@ -50,6 +54,9 @@ const value = defineModel<Number>()
   }
 
   select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
     border: 1px solid $purple-dark;
     padding: 0.25rem 1rem;
     border-radius: 0.5rem;
@@ -73,6 +80,12 @@ const value = defineModel<Number>()
       color: $purple-dark;
       font-weight: 500;
     }
+  }
+
+  .arrow {
+    position: absolute;
+    top: 1.125rem;
+    right: 1rem;
   }
 
   /* Chrome, Safari, Edge, Opera */
