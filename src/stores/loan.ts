@@ -55,11 +55,20 @@ export const useLoanStore = defineStore('loan', () => {
       !monthlyIncomeIsValid
     ) {
       validation.value = {
-        firstName: { error: !firstNameIsValid, msg: 'Field cannot be empty' },
-        lastName: { error: !lastNameIsValid, msg: 'Field cannot be empty' },
-        mobile: { error: !mobileIsValid, msg: 'Number has to start with 55, length 7-8 numbers' },
-        email: { error: !emailIsValid, msg: 'Enter correct email' },
-        monthlyIncome: { error: !monthlyIncomeIsValid, msg: 'Income has to be more than 100€' }
+        firstName: {
+          error: !firstNameIsValid,
+          msg: !firstNameIsValid ? 'Field cannot be empty' : ''
+        },
+        lastName: { error: !lastNameIsValid, msg: !lastNameIsValid ? 'Field cannot be empty' : '' },
+        mobile: {
+          error: !mobileIsValid,
+          msg: !mobileIsValid ? 'Number has to start with 55, length 7-8 numbers' : ''
+        },
+        email: { error: !emailIsValid, msg: !emailIsValid ? 'Enter correct email' : '' },
+        monthlyIncome: {
+          error: !monthlyIncomeIsValid,
+          msg: !monthlyIncomeIsValid ? 'Income has to be more than 100€ or has invalid type' : ''
+        }
       }
 
       return false
