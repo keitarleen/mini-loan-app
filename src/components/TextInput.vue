@@ -6,9 +6,10 @@ defineProps<{
   msg?: string
   style?: 'secondary'
   error?: boolean
+  min?: number
+  max?: number
 }>()
 const value = defineModel<number | string>()
-console.log()
 </script>
 
 <template>
@@ -18,8 +19,12 @@ console.log()
       type="type"
       :placeholder="placeholder"
       :class="{ secondary: style === 'secondary', error: error }"
+      :min="min"
+      :max="max"
     />
-    <label :class="{ top: type === 'number' ? value !== 0 : value !== '' }">{{ label }}</label>
+    <label :class="{ top: type === 'number' ? value !== 0 : value !== '', error: error }">{{
+      label
+    }}</label>
     <p v-if="msg || (msg && msg?.length > 0)" class="msg" :class="{ error: error }">{{ msg }}</p>
   </div>
 </template>
@@ -48,6 +53,10 @@ console.log()
       line-height: 1.125rem;
       color: $purple-dark;
       font-weight: 500;
+    }
+
+    &.error {
+      color: $alert;
     }
   }
 
@@ -82,6 +91,7 @@ console.log()
 
     &.error {
       border-color: $alert;
+      border: 2px solid $alert;
 
       &:focus {
         outline: none;

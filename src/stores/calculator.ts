@@ -15,6 +15,9 @@ export const useCalculatorStore = defineStore('calculator', () => {
   const amount = ref<number>(300)
   const period = ref<number>(PERIOD_OPTIONS[0].value)
 
+  const amountIsValid = computed(() => amount.value >= 300 && amount.value <= 7200)
+  const errorMsg = computed(() => (amountIsValid.value ? '' : 'Value must be between 300 and 7200'))
+
   const roundToTwo = (number: number) => Math.round(number * 100) / 100
 
   const monthlyPayment = computed(() => roundToTwo(amount.value / period.value))
@@ -24,5 +27,5 @@ export const useCalculatorStore = defineStore('calculator', () => {
     period.value = PERIOD_OPTIONS[0].value
   }
 
-  return { amount, period, monthlyPayment, reset }
+  return { amount, period, errorMsg, monthlyPayment, amountIsValid, reset }
 })

@@ -15,7 +15,15 @@ const calculator = useCalculatorStore()
   <div class="wrapper">
     <div class="row">
       <div class="input_wrapper">
-        <TextInput v-model="calculator.amount" :label="'Amount'" :type="'number'" />
+        <TextInput
+          v-model="calculator.amount"
+          :label="'Amount'"
+          :type="'number'"
+          :min="300"
+          :max="7200"
+          :msg="calculator.errorMsg"
+          :error="!calculator.amountIsValid"
+        />
       </div>
       <SliderInput v-model="calculator.amount" :min="300" :max="7200" :unit="'€'" />
     </div>
