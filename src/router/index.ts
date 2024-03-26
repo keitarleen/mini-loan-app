@@ -10,9 +10,14 @@ const router = createRouter({
       component: LoanView
     },
     {
-      path: '/result',
-      name: 'result',
-      component: () => import('../views/ResultView.vue')
+      path: '/loan-approved',
+      name: 'approved',
+      component: () => import('../views/ApprovedView.vue')
+    },
+    {
+      path: '/loan-declined',
+      name: 'declined',
+      component: () => import('../views/DeclinedView.vue')
     }
   ]
 })

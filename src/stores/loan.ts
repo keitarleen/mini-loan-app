@@ -75,13 +75,17 @@ export const useLoanStore = defineStore('loan', () => {
     }
   }
 
+  const loanApproved = computed(() => formData.value.monthlyIncome > 1000)
+
   const submit = () => {
     const valid = validate()
 
-    if (valid) router.push({ path: '/result' })
+    if (valid) {
+      loanApproved.value
+        ? router.push({ path: '/loan-approved' })
+        : router.push({ path: '/loan-declined' })
+    }
   }
-
-  const loanApproved = computed(() => formData.value.monthlyIncome > 1000)
 
   const reset = () => {
     formData.value = {
