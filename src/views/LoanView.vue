@@ -27,9 +27,9 @@ const handleModalClose = () => (modalOpen.value = false)
       </TextItem>
       <ButtonItem :text="'Apply now'" :style="'secondary'" @click="handleModalOpen" />
     </CardItem>
-    <CardItem>
+    <div class="img_card">
       <img class="image" src="@/assets/InBank_asset.webp" />
-    </CardItem>
+    </div>
   </div>
 
   <div class="calculator_container">
@@ -88,9 +88,24 @@ const handleModalClose = () => (modalOpen.value = false)
   }
 }
 
+.img_card {
+  border-radius: 100px;
+
+  @include lg {
+    flex: 0 0 50%;
+    border-radius: 200px;
+  }
+
+  @include xl {
+    flex: 0 0 59%;
+    border-radius: 200px;
+  }
+}
+
 .image {
   object-fit: cover;
   width: 100%;
+  height: 100%;
   border-radius: 100px;
 
   @include md {
