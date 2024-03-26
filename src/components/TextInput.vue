@@ -8,6 +8,7 @@ defineProps<{
   error?: boolean
 }>()
 const value = defineModel<number | string>()
+console.log()
 </script>
 
 <template>
@@ -39,7 +40,6 @@ const value = defineModel<number | string>()
     padding: 0 0.5rem;
     transition: all 0.3s ease-in-out;
     pointer-events: none;
-    // when no placeholder, label should be instead
 
     &.top {
       top: -0.5rem;

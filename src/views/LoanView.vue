@@ -6,6 +6,7 @@ import HeadingMain from '@/components/HeadingMain.vue'
 import TextItem from '@/components/TextItem.vue'
 import Sliders from '@/components/SlidersGroup.vue'
 import LoanModal from '@/components/LoanModal.vue'
+import DividerItem from '@/components/DividerItem.vue'
 import { useCalculatorStore } from '@/stores/calculator'
 
 const calculator = useCalculatorStore()
@@ -39,7 +40,7 @@ const handleModalClose = () => (modalOpen.value = false)
           Estimate your monthly payments based on the chosen loan amount and time period
         </TextItem>
       </div>
-      <div class="divider" />
+      <div class="desktop_only"><DividerItem :position="'vertical'" /></div>
       <div class="sliders_wrapper">
         <Sliders />
         <div class="result">
@@ -79,15 +80,11 @@ const handleModalClose = () => (modalOpen.value = false)
   }
 }
 
-.divider {
+.desktop_only {
   display: none;
 
   @include md {
     display: block;
-    width: 1px;
-    height: 100%;
-    background: $black;
-    opacity: 0.15;
   }
 }
 
@@ -158,11 +155,5 @@ const handleModalClose = () => (modalOpen.value = false)
     align-items: center;
     gap: 1.5rem;
   }
-}
-
-.ib-slider-handle {
-  width: 1rem;
-  height: 6px;
-  background-color: red;
 }
 </style>

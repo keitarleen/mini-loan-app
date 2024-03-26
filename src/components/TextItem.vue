@@ -1,7 +1,7 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    size?: 'small' | 'regular' | 'large'
+    size?: 'small' | 'medium' | 'regular' | 'large'
     weight?: 'bold' | 'normal' | 'thin'
     align?: 'center' | 'normal'
   }>(),
@@ -30,6 +30,12 @@ p {
     opacity: 0.6;
     line-height: 1rem;
     font-size: 0.75rem;
+  }
+
+  &.medium {
+    opacity: 0.75;
+    line-height: 1.25rem;
+    font-size: 0.875rem;
   }
 
   &.bold {

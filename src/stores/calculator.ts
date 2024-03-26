@@ -19,5 +19,10 @@ export const useCalculatorStore = defineStore('calculator', () => {
 
   const monthlyPayment = computed(() => roundToTwo(amount.value / period.value))
 
-  return { amount, period, monthlyPayment }
+  const reset = () => {
+    amount.value = 300
+    period.value = PERIOD_OPTIONS[0].value
+  }
+
+  return { amount, period, monthlyPayment, reset }
 })

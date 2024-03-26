@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 type PersonalData = {
@@ -10,24 +10,33 @@ type PersonalData = {
   monthlyIncome: number
 }
 
+type Validation = {
+  msg: string
+  error: boolean
+}
+
+const VALIDATION_INIT = {
+  firstName: { error: false, msg: '' },
+  lastName: { error: false, msg: '' },
+  mobile: { error: false, msg: '' },
+  email: { error: false, msg: '' },
+  monthlyIncome: { error: false, msg: '' }
+}
+
+const FORM_INIT = {
+  firstName: '',
+  lastName: '',
+  mobile: '',
+  email: '',
+  monthlyIncome: 0
+}
+
 export const useLoanStore = defineStore('loan', () => {
   const router = useRouter()
 
-  const formData = ref<PersonalData>({
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    email: '',
-    monthlyIncome: 0
-  })
+  const formData = ref<PersonalData>(FORM_INIT)
 
-  const validation = ref({
-    firstName: { error: false, msg: '' },
-    lastName: { error: false, msg: '' },
-    mobile: { error: false, msg: '' },
-    email: { error: false, msg: '' },
-    monthlyIncome: { error: false, msg: '' }
-  })
+  const validation = ref<{ [key: string]: Validation }>(VALIDATION_INIT)
 
   const validate = () => {
     const firstNameIsValid = formData.value.firstName !== ''
@@ -67,13 +76,23 @@ export const useLoanStore = defineStore('loan', () => {
   }
 
   const submit = () => {
-    console.log(formData.value)
-
     const valid = validate()
 
-    // reset modal values after submit
-    if (valid) router.push('/result')
+    if (valid) router.push({ path: '/result' })
   }
 
-  return { formData, validation, submit }
+  const loanApproved = computed(() => formData.value.monthlyIncome > 1000)
+
+  const reset = () => {
+    formData.value = {
+      firstName: '',
+      lastName: '',
+      mobile: '',
+      email: '',
+      monthlyIncome: 0
+    }
+    validation.value = VALIDATION_INIT
+  }
+
+  return { formData, validation, submit, loanApproved, reset }
 })
