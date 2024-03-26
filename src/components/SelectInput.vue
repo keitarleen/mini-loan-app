@@ -27,10 +27,6 @@ const value = defineModel<Number>()
 .select_wrapper {
   position: relative;
 
-  @include md {
-    width: 160px;
-  }
-
   label {
     position: absolute;
     top: 1rem;

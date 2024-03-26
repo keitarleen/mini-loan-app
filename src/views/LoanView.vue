@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import ButtonItem from '@/components/ButtonItem.vue'
 import CardItem from '@/components/CardItem.vue'
 import HeadingMain from '@/components/HeadingMain.vue'
 import TextItem from '@/components/TextItem.vue'
 import Sliders from '@/components/SlidersGroup.vue'
+import LoanModal from '@/components/LoanModal.vue'
 import { useCalculatorStore } from '@/stores/calculator'
 
 const calculator = useCalculatorStore()
+const modalOpen = ref<boolean>(false)
+
+const handleModalOpen = () => (modalOpen.value = true)
+const handleModalClose = () => (modalOpen.value = false)
 </script>
 
 <template>
@@ -18,7 +24,7 @@ const calculator = useCalculatorStore()
         Finance unforeseen expenses with InBank. A quick and easy application process with and
         instant credit decision
       </TextItem>
-      <ButtonItem :text="'Apply now'" :style="'secondary'" />
+      <ButtonItem :text="'Apply now'" :style="'secondary'" @click="handleModalOpen" />
     </CardItem>
     <CardItem>
       <img class="image" src="@/assets/InBank_asset.webp" />
@@ -39,7 +45,7 @@ const calculator = useCalculatorStore()
         <div class="result">
           <TextItem :weight="'bold'">Monthly payment</TextItem>
           <HeadingMain>{{ calculator.monthlyPayment }} €</HeadingMain>
-          <ButtonItem :text="'Apply now'" :style="'primary'" />
+          <ButtonItem :text="'Apply now'" :style="'primary'" @click="handleModalOpen" />
           <TextItem :size="'small'">
             The calculation is approximate and may differ from the conditions offered to you. Please
             submit a loan application to receive a personal offer. Financial services are provided
@@ -49,6 +55,8 @@ const calculator = useCalculatorStore()
       </div>
     </div>
   </div>
+
+  <LoanModal v-if="modalOpen" :handleModalClose="handleModalClose" />
 </template>
 
 <style scoped lang="scss">

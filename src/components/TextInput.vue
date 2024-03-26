@@ -1,25 +1,31 @@
 <script setup lang="ts">
 defineProps<{
   label: string
-  type: 'text' | 'select' | 'number'
+  type: 'text' | 'number'
+  placeholder?: string
+  msg?: string
+  style?: 'secondary'
+  error?: boolean
 }>()
-const value = defineModel<Number>()
+const value = defineModel<number | string>()
 </script>
 
 <template>
   <div class="input_wrapper">
-    <input placeholder="input" v-model="value" value="value" type="type" />
-    <label :class="{ top: value !== 0 }">{{ label }}</label>
+    <input
+      v-model="value"
+      type="type"
+      :placeholder="placeholder"
+      :class="{ secondary: style === 'secondary', error: error }"
+    />
+    <label :class="{ top: type === 'number' ? value !== 0 : value !== '' }">{{ label }}</label>
+    <p v-if="msg || (msg && msg?.length > 0)" class="msg" :class="{ error: error }">{{ msg }}</p>
   </div>
 </template>
 
 <style scoped lang="scss">
 .input_wrapper {
   position: relative;
-
-  @include md {
-    width: 160px;
-  }
 
   label {
     position: absolute;
@@ -32,6 +38,7 @@ const value = defineModel<Number>()
     border-radius: 100px;
     padding: 0 0.5rem;
     transition: all 0.3s ease-in-out;
+    pointer-events: none;
     // when no placeholder, label should be instead
 
     &.top {
@@ -68,6 +75,23 @@ const value = defineModel<Number>()
       color: $purple-dark;
       font-weight: 500;
     }
+
+    &.secondary {
+      border-color: #dedede;
+    }
+
+    &.error {
+      border-color: $alert;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px $alert;
+      }
+
+      &:focus + label {
+        color: $alert;
+      }
+    }
   }
 
   /* Chrome, Safari, Edge, Opera */
@@ -80,6 +104,18 @@ const value = defineModel<Number>()
   /* Firefox */
   input[type='number'] {
     appearance: textfield;
+  }
+
+  .msg {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    font-weight: 500;
+    color: $text-gray;
+    padding: 0.25rem 1rem 0 1rem;
+
+    &.error {
+      color: $alert;
+    }
   }
 }
 </style>
