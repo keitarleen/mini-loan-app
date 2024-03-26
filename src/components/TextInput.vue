@@ -86,7 +86,7 @@ const value = defineModel<number | string>()
     }
 
     &.secondary {
-      border-color: #dedede;
+      border-color: $gray;
     }
 
     &.error {
